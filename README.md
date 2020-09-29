@@ -19,23 +19,33 @@ This is a [editable polyline plugin](https://github.com/kerasus/vue-leaflet-edit
 
 Then you should be able to navigate with your browser and see the demo in http://localhost:4000/
 
-You can see the demo code in the file [example.vue](example.vue)
-
 ## Usage
 
 ### on &lt;template&gt; add
 
 something like this
 
-    <v-map :zoom=11 :center="initialLocation">
+    <l-map>
         <editable-polyline
             ref="editablePolyline"
             :latlngs="editablePolylinelatlngs"
-            :editablePolylineOptions="{}"
-            :zoom="zoom"
-            :center="center"
+            :editablePolylineOptions="{
+                                          latlngs: [],
+                                          line: {
+                                              color: 'red',
+                                              bubblingMouseEvents: true,
+                                              weight: 5,
+                                              dashArray: '4 2',
+                                              dashOffset: '0'
+                                          },
+                                          displayZoom: 6,
+                                          iconSize: [16, 16],
+                                          iconAnchor: [10, 10],
+                                      }"
+            :zoom="LMapZoom"
+            :center="LMapCenter"
         />
-    </v-map>
+    </l-map>
 
 ### on &lt;script&gt; add
 
