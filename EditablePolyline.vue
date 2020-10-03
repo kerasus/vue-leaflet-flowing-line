@@ -3,6 +3,7 @@
         <l-polyline
                 :lat-lngs="editablePolylinelatlngs"
                 :color="editablePolylineOptions.line.color"
+                :className="editablePolylineOptions.line.className"
                 :bubblingMouseEvents="editablePolylineOptions.line.bubblingMouseEvents"
                 :dashArray="editablePolylineOptions.line.dashArray"
                 :dashOffset="editablePolylineOptions.line.dashOffset"
@@ -52,6 +53,7 @@
                 default: {
                     line: {
                         color: 'red',
+                        className: '',
                         bubblingMouseEvents: false,
                         weight: 5,
                         dashArray: '4 2 8',
@@ -74,7 +76,7 @@
             }
         },
         watch: {
-            latlngs (to, from) {
+            latlngs (to) {
                 this.editablePolylinelatlngs = to;
             }
         },

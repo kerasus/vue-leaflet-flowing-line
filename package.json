@@ -1,6 +1,6 @@
 {
   "name": "vue-leaflet-editable-polyline",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "editable polyline for leaflet in vue",
   "main": "index.js",
   "repository": {
