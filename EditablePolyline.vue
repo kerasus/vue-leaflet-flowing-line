@@ -2,6 +2,7 @@
     <div>
         <l-polyline
                 :lat-lngs="editablePolylinelatlngs"
+                :options="editablePolylineOptions.line.options"
                 :color="editablePolylineOptions.line.color"
                 :className="editablePolylineOptions.line.className"
                 :bubblingMouseEvents="editablePolylineOptions.line.bubblingMouseEvents"
