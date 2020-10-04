@@ -1,18 +1,18 @@
 {
-  "name": "vue-leaflet-flowing-line",
-  "version": "0.1.0",
-  "description": "flowing line for leaflet in vue",
+  "name": "vue-leaflet-editable-polyline",
+  "version": "0.1.4",
+  "description": "editable polyline for leaflet in vue",
   "main": "index.js",
   "repository": {
     "type": "git",
     "url": "krasus"
   },
   "keywords": [
-    "vue-leaflet-flowing-line"
+    "vue-leaflet-editable-polyline"
   ],
   "author": "a.esmaeeli",
   "license": "MIT",
-  "homepage": "https://github.com/kerasus/vue-leaflet-flowing-line",
+  "homepage": "https://github.com/kerasus/vue-leaflet-editable-polyline",
   "dependencies": {
     "vue": "^2.6.12",
     "vue2-leaflet": "^2.5.2"
