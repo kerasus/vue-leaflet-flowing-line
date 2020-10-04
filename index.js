@@ -13,6 +13,9 @@ var FlowingSVG = {
             if (!options2.flowing || !options2.flowing.style) {
                 return;
             }
+            if (options2.flowing.dir === 'fixed') {
+                return;
+            }
             let styles = '';
             for (const [key, value] of Object.entries(options2.flowing.style)) {
                 styles += key + ': ' + value + 's; ';
