@@ -1,0 +1,62 @@
+@-webkit-keyframes leaflet-flowing-line-animation {
+    from {
+        stroke-dashoffset: 100%;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@-moz-keyframes leaflet-flowing-line-animation {
+    from {
+        stroke-dashoffset: 100%;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@-ms-keyframes leaflet-flowing-line-animation {
+    from {
+        stroke-dashoffset: 100%;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@-o-keyframes leaflet-flowing-line-animation {
+    from {
+        stroke-dashoffset: 100%;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes leaflet-flowing-line-animation {
+    from {
+        stroke-dashoffset: 100%;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+path.leaflet-flowing-line {
+    fill: none;
+    -webkit-animation: linear infinite leaflet-flowing-line-animation;
+    -moz-animation: linear infinite leaflet-flowing-line-animation;
+    -ms-animation: linear infinite leaflet-flowing-line-animation;
+    -o-animation: linear infinite leaflet-flowing-line-animation;
+    animation: linear infinite leaflet-flowing-line-animation;
+    animation-duration: 0s;
+}
+
+path.leaflet-flowing-line__reverse {
+    -webkit-animation-direction: reverse;
+    -moz-animation-direction: reverse;
+    -ms-animation-direction: reverse;
+    -o-animation-direction: reverse;
+    animation-direction: reverse;
+}
