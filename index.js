@@ -15,7 +15,7 @@ var FlowingSVG = {
             }
             let styles = '';
             for (const [key, value] of Object.entries(options2.flowing.style)) {
-                styles += key + ': ' + value + '; ';
+                styles += key + ': ' + value + 's; ';
             }
             styles += '';
             path1.setAttribute('style', styles);
