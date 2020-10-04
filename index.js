@@ -14,6 +14,8 @@ var FlowingSVG = {
                 return;
             }
             if (options2.flowing.dir === 'fixed') {
+                path1.classList.remove('leaflet-flowing-line');
+                path1.classList.remove('leaflet-flowing-line__reverse');
                 return;
             }
             let styles = '';
