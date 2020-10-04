@@ -25,6 +25,8 @@ var FlowingSVG = {
             path1.classList.add('leaflet-flowing-line');
             if (options2.flowing.dir === 'reverse') {
                 path1.classList.add('leaflet-flowing-line__reverse');
+            } else {
+                path1.classList.remove('leaflet-flowing-line__reverse');
             }
         };
     }
