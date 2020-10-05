@@ -1,10 +1,11 @@
 'use strict';
 
-import {SVG} from 'leaflet'
-import FlowingLine from "./FlowingLine"
+import { SVG } from 'leaflet'
+import __vue_component__ from 'vue2-leaflet/dist/components/LPolyline.js'
 
 var FlowingSVG = {
     install: function (){
+
         let updateStyle = SVG.prototype._updateStyle;
         SVG.prototype._updateStyle = function(layer) {
             updateStyle(layer);
@@ -31,7 +32,37 @@ var FlowingSVG = {
                 path1.classList.remove('leaflet-flowing-line__reverse');
             }
         };
+
+        // Define this function so you can reuse it later and keep your overrides "cleaner"
+        function hookFunction(object, functionName, callback) {
+            (function(originalFunction) {
+                object[functionName] = function () {
+                    var returnValue = originalFunction.apply(this, arguments);
+
+                    callback.apply(this, [returnValue, originalFunction, arguments]);
+
+                    return returnValue;
+                };
+            }(object[functionName]));
+        }
+
+        hookFunction(__vue_component__, 'mounted', function(){
+            /* This anonymous function gets called after UIIntentionalStream.instance.loadOlderPosts() has finished */
+            if (this.mapObject.options.flowing) {
+                this.$watch(
+                    'options.flowing',
+                    function (newVal) {
+                        // this['setFlowing'](newVal, oldVal);
+                        this.mapObject.setStyle({ flowing: newVal });
+                    },
+                    {
+                        deep: true,
+                    }
+                );
+            }
+        });
+
     }
 };
 
-export { FlowingLine, FlowingSVG }
+export { FlowingSVG }
