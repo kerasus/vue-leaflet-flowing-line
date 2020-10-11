@@ -19,7 +19,7 @@ var FlowingSVG = {
                 path1.classList.remove('leaflet-flowing-line__reverse');
                 return;
             }
-            let styles = '';
+            var styles = '';
             for (const [key, value] of Object.entries(options2.flowing.style)) {
                 styles += key + ': ' + value + 's; ';
             }
