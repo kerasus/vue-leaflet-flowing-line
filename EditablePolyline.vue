@@ -4,6 +4,7 @@
                 :lat-lngs="editablePolylinelatlngs"
                 :options="editablePolylineOptions.line.options"
                 :color="editablePolylineOptions.line.color"
+                :visible="visible"
                 :className="editablePolylineOptions.line.className"
                 :bubblingMouseEvents="editablePolylineOptions.line.bubblingMouseEvents"
                 :dashArray="editablePolylineOptions.line.dashArray"
@@ -14,6 +15,7 @@
         <l-marker
                 v-if="zoom >= editablePolylineOptions.displayZoom"
                 v-for="(item, index) in editablePolylinelatlngs"
+                :visible="visible"
                 :lat-lng="item"
                 :draggable="true"
                 @dblclick="removeEditablePolylineLatLang($event, item, index)"
@@ -44,6 +46,10 @@
             zoom: {
                 type: Number,
                 default: 1
+            },
+            visible: {
+                type: Boolean,
+                default: true
             },
             center: {
                 type: Object,
