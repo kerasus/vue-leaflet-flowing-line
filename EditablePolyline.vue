@@ -13,7 +13,7 @@
         >
         </l-polyline>
         <l-marker
-                v-if="zoom >= editablePolylineOptions.displayZoom"
+                v-if="map.zoom >= editablePolylineOptions.displayZoom"
                 v-for="(item, index) in editablePolylinelatlngs"
                 :visible="visible"
                 :lat-lng="item"
@@ -43,17 +43,13 @@
                 type: Array,
                 default: []
             },
-            zoom: {
-                type: Number,
-                default: 1
+            map: {
+                type: Object,
+                required: true
             },
             visible: {
                 type: Boolean,
                 default: true
-            },
-            center: {
-                type: Object,
-                default: { lat: 0, lng: 0}
             },
             editablePolylineOptions: {
                 type: Object,
@@ -88,7 +84,7 @@
             }
         },
         methods: {
-            updatrLatlang () {
+            updateLatlang () {
                 // this.latlngs = this.editablePolylinelatlngs;
                 this.$emit('update:latlngs', this.editablePolylinelatlngs)
             },
@@ -99,14 +95,35 @@
                     return 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3gEEBgwnW9DvzQAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAEPSURBVBjTbZBBSkJxGMR/89cQnxAKFdQiCTeK0M5c1y08iifwPO46QIgHUJQWlctQ1E1P1N6bFiooNsuZH/N9jDhSGkWX2FdO04KkNSHMQhzPD7n2kGw/Ca7dbKJKBeZz3O+jxeLHIbxl4ngrgCSff6ZUKqjXQ+Uy3rcYcKuFul0svSqNontns4+aTFCxePwVtpGEGw0YDD4D9i212g60T2BJO6/TwZvNXXCaFlStHlLOJKFqFTKZi6AQNh6PD3fPYRuPx5AkabD0zWiEl8uzZts7r91Gudw0CL7YbnG9jieTHXT0QtpqwXCIpffDzpHtFwH/7Awh9EMcz07uJvn8g+AGu4C0tjTF/sisVr8Af3fdgpLllLoZAAAAAElFTkSuQmCC'
                 }
             },
+            calcLatLngByPercent(percent, southWestVal, northEastVal) {
+                let diff = (northEastVal - southWestVal);
+                let diffPercent = diff * (percent / 100);
+                let calced = southWestVal + diffPercent;
+                return calced
+            },
+            getNewPointByboundsPercent(percent) {
+                return {
+                    lat: this.calcLatLngByPercent(percent, this.map.bounds._southWest.lat, this.map.bounds._northEast.lat),
+                    lng: this.calcLatLngByPercent(percent, this.map.bounds._southWest.lng, this.map.bounds._northEast.lng)
+                }
+            },
             resetToCenterOfMap() {
-                let newCenter = JSON.parse(JSON.stringify(this.center));
+                if (!this.map) {
+                    return
+                }
+
+                console.log('this.map', this.map.zoom)
+
+                let point1 = this.getNewPointByboundsPercent(35),
+                    point2 = this.getNewPointByboundsPercent(50),
+                    point3 = this.getNewPointByboundsPercent(65);
+
                 this.editablePolylinelatlngs = [
-                    { lat: newCenter.lat-100, lng: newCenter.lng-100},
-                    this.calcMiddlePoint({ lat: newCenter.lat-100, lng: newCenter.lng-100}, { lat: newCenter.lat+100, lng: newCenter.lng+100}),
-                    { lat: newCenter.lat+100, lng: newCenter.lng+100}
+                    point1,
+                    point2,
+                    point3
                 ];
-                this.updatrLatlang();
+                this.updateLatlang();
             },
             calcMiddlePoint(latlang1, latlang2) {
                 return {
@@ -125,11 +142,11 @@
                 this.editablePolylinelatlngs.splice(index+1, 1)
                 this.editablePolylinelatlngs.splice(index, 1)
 
-                this.updatrLatlang();
+                this.updateLatlang();
             },
             updateEditablePolylineLatLangs(event, item, index) {
                 Vue.set(this.editablePolylinelatlngs, index, event.latlng);
-                this.updatrLatlang();
+                this.updateLatlang();
             },
             checkForAddPiontToEditablePolylineLatLangs(event, item, index) {
                 if (index % 2 === 0) {
@@ -144,16 +161,12 @@
                 Vue.set(this.editablePolylinelatlngs, index, mid1);
                 this.editablePolylinelatlngs.splice(index+2, 0, mid2)
                 Vue.set(this.editablePolylinelatlngs, index+2, mid2);
-                this.updatrLatlang();
+                this.updateLatlang();
             }
         },
         created: function () {
             this.editablePolylinelatlngs = this.latlngs;
-            this.updatrLatlang();
+            this.updateLatlang();
         }
     }
 </script>
-
-<style scoped>
-
-</style>
