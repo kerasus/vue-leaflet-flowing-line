@@ -1,7 +1,7 @@
 {
   "name": "vue-leaflet-flowing-line",
   "version": "0.1.7",
-  "private": true,
+  "private": false,
   "description": "flowing line for leaflet in vue",
   "author": {
     "name": "a.esmaeeli"
